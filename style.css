@@ -1,0 +1,149 @@
+body{
+    margin:0;
+    font-family: 'Poppins', sans-serif;
+    background:linear-gradient(to bottom,#fff8e1,#ffe0b2);
+}
+
+/* HEADER */
+header{
+    background:linear-gradient(90deg,#e65100,#ff9800);
+    color:white;
+    text-align:center;
+    padding:25px;
+    box-shadow:0 4px 10px rgba(0,0,0,0.2);
+}
+
+header h1{
+    margin:0;
+    font-size:30px;
+    letter-spacing:1px;
+}
+
+/* NAV */
+nav{
+    display:flex;
+    flex-wrap:wrap;
+    justify-content:center;
+    background:rgba(255,255,255,0.8);
+    backdrop-filter:blur(10px);
+    padding:10px;
+    position:sticky;
+    top:0;
+    z-index:10;
+}
+
+nav button{
+    margin:5px;
+    cursor:pointer;
+    background:linear-gradient(45deg,#ff6f00,#ff9800);
+    color:white;
+    border:none;
+    padding:8px 16px;
+    border-radius:20px;
+    transition:0.3s;
+}
+
+nav button:hover{
+    background:#2e7d32;
+    transform:scale(1.1);
+}
+
+/* SEARCH */
+.search{
+    padding:12px;
+}
+
+.search input{
+    width:100%;
+    padding:12px;
+    border-radius:10px;
+    border:none;
+    box-shadow:0 2px 8px rgba(0,0,0,0.1);
+}
+
+/* SECTION */
+.section{
+    padding:15px;
+}
+
+.section h2{
+    color:#bf360c;
+    border-left:6px solid #2e7d32;
+    padding-left:10px;
+    font-weight:bold;
+}
+
+/* CARD */
+.card{
+    display:flex;
+    background:rgba(255,255,255,0.7);
+    backdrop-filter:blur(8px);
+    border-radius:15px;
+    overflow:hidden;
+    margin-bottom:15px;
+    box-shadow:0 6px 20px rgba(0,0,0,0.1);
+    transition:0.3s;
+}
+
+.card:hover{
+    transform:translateY(-5px) scale(1.02);
+}
+
+/* IMAGE */
+.card img{
+    width:110px;
+    height:110px;
+    object-fit:cover;
+}
+
+/* CONTENT */
+.card-content{
+    padding:12px;
+    flex:1;
+}
+
+.card-content h3{
+    margin:0;
+    color:#d84315;
+}
+
+.card-content span{
+    font-size:13px;
+    color:#555;
+}
+
+/* PRICE */
+.price{
+    color:#2e7d32;
+    font-weight:bold;
+    font-size:16px;
+}
+
+/* TAG */
+.tag{
+    background:#2e7d32;
+    color:white;
+    font-size:11px;
+    padding:4px 10px;
+    border-radius:12px;
+    display:inline-block;
+    margin-top:5px;
+}
+
+/* THALI */
+.thali{
+    background:white;
+    padding:15px;
+    border-radius:15px;
+    margin-bottom:15px;
+    border-left:6px solid #ff6f00;
+    box-shadow:0 4px 10px rgba(0,0,0,0.1);
+}
+
+/* FOOTER */
+footer{
+    text-align:center;
+    padding:20px;
+    background:linear-gradient(90deg,#ff9800,#ffcc80);
+    font-size:14px;
+}
