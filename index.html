@@ -1,0 +1,338 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Shiv Bhojnalay Menu</title>
+
+<style>
+
+body{
+    margin:0;
+    font-family: 'Trebuchet MS', sans-serif;
+    background:#fff8e1;
+}
+
+/* HEADER */
+header{
+    background:linear-gradient(90deg,#ff6f00,#ff9800);
+    color:white;
+    text-align:center;
+    padding:20px;
+}
+
+header h1{
+    margin:0;
+    font-size:28px;
+    letter-spacing:1px;
+}
+
+header p{
+    margin:5px;
+    font-size:14px;
+}
+
+nav{
+    display:flex;
+    flex-wrap:wrap;
+    justify-content:center;
+    background:#f7f7f7;
+    padding:10px;
+    position:sticky;
+    top:0;
+    z-index:10;
+}
+
+nav button{
+    border:1px solid #ffffff;
+    margin:5px;
+    cursor:pointer;
+    transition:0.3s;
+    
+    background:linear-gradient(90deg,#ff6f00,#ff9800);
+    color:white;
+    font-size:15px;
+    padding:8px 15px;
+    border-radius:18px;
+    display:inline-block;
+    margin-top:5px;
+}
+
+nav button:hover{
+    background:#2e7d32;
+    color:#ffffff;
+    font-weight: bolder;
+}
+
+/* SEARCH */
+.search{
+    padding:12px;
+    background:#fff3cd;
+}
+
+.search input{
+    width:100%;
+    padding:10px;
+    border-radius:8px;
+    border:1px solid #ddd;
+}
+
+/* SECTION */
+.section{
+    padding:15px;
+}
+
+.section h2{
+    color:#e65100;
+    border-left:5px solid #2e7d32;
+    padding-left:10px;
+}
+
+/* CARD */
+.card{
+    display:flex;
+    background:white;
+    border-radius:12px;
+    overflow:hidden;
+    margin-bottom:15px;
+    box-shadow:0 3px 10px rgba(0,0,0,0.1);
+    transition:0.3s;
+}
+
+.card:hover{
+    transform:scale(1.03);
+}
+
+/* IMAGE */
+.card img{
+    width:110px;
+    height:110px;
+    object-fit:cover;
+}
+
+/* CONTENT */
+.card-content{
+    padding:10px;
+    flex:1;
+}
+
+.card-content h3{
+    margin:0;
+    color:#bf360c;
+}
+
+.card-content span{
+    font-size:13px;
+    color:#666;
+}
+
+/* PRICE */
+.price{
+    color:#2e7d32;
+    font-weight:bold;
+    margin-top:5px;
+}
+
+/* TAG */
+.tag{
+    background:#2e7d32;
+    color:white;
+    font-size:11px;
+    padding:3px 8px;
+    border-radius:10px;
+    display:inline-block;
+    margin-top:5px;
+}
+
+/* THALI */
+.thali{
+    background:white;
+    padding:15px;
+    border-radius:12px;
+    margin-bottom:15px;
+    border-left:5px solid #ff6f00;
+}
+
+/* FOOTER */
+footer{
+    text-align:center;
+    padding:20px;
+    background:#ffcc80;
+    font-size:13px;
+}
+
+</style>
+
+</head>
+
+<body>
+
+<header>
+<h1>Shiv Bhojnalay & Restaurant</h1>
+<p>Thokar Choraha, Udaipur Rajasthan</p>
+<p>ठोकर चौराहा, उदयपुर राजस्थान</p>
+<p>Contact: 8233106918 | 9460113849</p>
+</header>
+
+<nav>
+<button onclick="scrollToSection('veg')">Veg</button>
+<button onclick="scrollToSection('paneer')">Paneer</button>
+<button onclick="scrollToSection('dal')">Dal</button>
+<button onclick="scrollToSection('rice')">Rice</button>
+<button onclick="scrollToSection('bread')">Roti & Paratha</button>
+<button onclick="scrollToSection('fastfood')">Fast Food</button>
+<button onclick="scrollToSection('thali')">Thali</button>
+</nav>
+
+<div class="search">
+<input type="text" placeholder="Search for dishes..." onkeyup="searchItems(this.value)">
+</div>
+
+<div class="section" id="menu">
+
+<section id="popular-dishes">
+<h2>🔥 Popular Dishes</h2>
+
+<div class="card">
+<img src="download (11).jpeg" />
+<div class="card-content">
+<h3>Sev Tamatar</h3>
+<span>सेव टमाटर</span>
+<div class="price">₹90</div>
+<div class="tag">BESTSELLER</div>
+</div>
+</div>
+
+<div class="card">
+<img src="download (11).jpeg" />
+<div class="card-content">
+<h3>Shahi Paneer</h3>
+<span>शाही पनीर</span>
+<div class="price">₹160</div>
+<div class="tag">POPULAR</div>
+</div>
+</div>
+
+<div class="card">
+<img src="download (11).jpeg" />
+<div class="card-content">
+<h3>Dal Tadka</h3>
+<span>दाल तड़का</span>
+<div class="price">₹100</div>
+</div>
+</div>
+</section>
+
+<section id="veg-sabji">
+<h2>🍛 Main Course</h2>
+<div class="card"><img src="download (11).jpeg" /><div class="card-content"><h3>Sev Tamatar</h3><span>सेव टमाटर</span><div class="price">₹90</div><div class="tag">BESTSELLER</div></div></div>
+<div class="card"><img src="download (11).jpeg" /><div class=card-content><h3>Jeera Aloo Gravy</h3> <span>जीरा आलू</span> <div class="price">₹90</div></div></div>
+<div class="card"><img src="download (11).jpeg" /><div class=card-content><h3>Palak Aloo </h3><span>पालक आलू</span> <div class="price">₹90</div></div></div>
+<div class="card"><img src="download (11).jpeg" /><div class=card-content><h3>Aloo Mutter</h3><span>आलू मटर</span> <div class="price">₹90</div></div></div>
+<div class="card"><img src="download (11).jpeg" /><div class=card-content><h3>Mix Vegetables</h3> <span>मिक्स वेज</span> <div class="price">₹90</div></div></div>
+<div class="card"><img src="download (11).jpeg" /><div class=card-content><h3>Chana Masala</h3> <span>चना मसाला</span> <div class="price">₹90</div></div></div>
+<div class="card"><img src="download (11).jpeg" /><div class=card-content><h3>Bhindi Masala</h3> <span>भिंडी मसाला</span> <div class="price">₹90</div></div></div>
+</section>
+
+<section id="paneer">
+<h2>Paneer Special (पनीर स्पेशल)</h2>
+<div class="card"><img src="download (11).jpeg" /><div class="card-content"><h3>Chola Paneer</h3> <span>छोला पनीर</span> <div class="price">₹150</div></div></div>
+<div class="card"><img src="download (11).jpeg" /><div class="card-content"><h3>Mutter Paneer</h3> <span>मटर पनीर</span> <div class="price">₹150</div></div></div>
+<div class="card"><img src="download (11).jpeg" /><div class="card-content"><h3>Palak Paneer </h3><span>पालक पनीर</span> <div class="price">₹150</div></div></div>
+<div class="card"><img src="download (11).jpeg" /><div class="card-content"><h3>Shahi Paneer</h3> <span>शाही पनीर</span> <div class="price">₹160</div></div></div>
+<div class="card"><img src="download (11).jpeg" /><div class="card-content"><h3>Malai Kofta</h3> <span>मलाई कोफ्ता</span> <div class="price">₹160</div></div></div>
+<div class="card"><img src="download (11).jpeg" /><div class="card-content"><h3>Kadai Paneer</h3> <span>कढ़ाई पनीर</span> <div class="price">₹170</div></div></div>
+<div class="card"><img src="download (11).jpeg" /><div class="card-content"><h3>Paneer Butter Masala</h3> <span>पनीर बटर मसाला</span> <div class="price">₹170</div></div></div>
+</section>
+
+<section id="dal">
+<h2>Dal (दाल)</h2>
+<div class="card"><img src="download (11).jpeg" /><div class="card-content"><h3>Dal Fry </h3><span>दाल फ्राई</span> <div class="price">₹90</div></div></div>
+<div class="card"><img src="download (11).jpeg" /><div class="card-content"><h3>Jain Dal</h3> <span>जैन दाल</span> <div class="price">₹90</div></div></div>
+<div class="card"><img src="download (11).jpeg" /><div class="card-content"><h3>Dal Tadka </h3><span>दाल तड़का</span> <div class="price">₹100</div></div></div>
+<div class="card"><img src="download (11).jpeg" /><div class="card-content"><h3>Butter Dal </h3><span>बटर दाल</span> <div class="price">₹100</div></div></div>
+</section>
+
+<section id="rice">
+<h2>🍚 Rice</h2>
+
+<div class="card"><img src="download (11).jpeg" /><div class="card-content"><h3>Plain Rice </h3><span>सादा चावल</span> <div class="price">₹70</div></div></div>
+<div class="card"><img src="download (11).jpeg" /><div class="card-content"><h3>Jeera Rice </h3><span>जीरा राइस</span> <div class="price">₹80</div></div></div>
+<div class="card"><img src="download (11).jpeg" /><div class="card-content"><h3>Mutter Pulav</h3> <span>मटर पुलाव</span> <div class="price">₹90</div></div></div>
+<div class="card"><img src="download (11).jpeg" /><div class="card-content"><h3>Veg Pulav</h3> <span>वेज पुलाव</span> <div class="price">₹100</div></div></div>
+<div class="card"><img src="download (11).jpeg" /><div class="card-content"><h3>Veg Biryani</h3> <span>वेज बिरयानी</span> <div class="price">₹130</div></div></div>
+<div class="card"><img src="download (11).jpeg" /><div class="card-content"><h3>Paneer Pulav </h3><span>पनीर पुलाव</span> <div class="price">₹150</div></div></div>
+</section>
+
+<Section id="bread">
+<h2>Roti & Paratha (रोटी और पराठा)</h2>
+
+<div class="card"><img src="download (11).jpeg" /><div class="card-content"><h3>Plain Roti</h3> <span>रोटी</span> <div class="price">₹10</div></div></div>
+<div class="card"><img src="download (11).jpeg" /><div class="card-content"><h3>Butter Roti</h3> <span>बटर रोटी</span> <div class="price">₹12</div></div></div>
+<div class="card"><img src="download (11).jpeg" /><div class="card-content"><h3>Paratha</h3> <span>पराठा</span> <div class="price">₹25</div></div></div>
+<div class="card"><img src="download (11).jpeg" /><div class="card-content"><h3>Butter Paratha</h3> <span>बटर पराठा</span> <div class="price">₹30</div></div></div>
+<div class="card"><img src="download (11).jpeg" /><div class="card-content"><h3>Lacha Paratha</h3> <span>लच्छा पराठा</span> <div class="price">₹40</div></div></div>
+<div class="card"><img src="download (11).jpeg" /><div class="card-content"><h3>Aloo Paratha</h3> <span>आलू पराठा</span> <div class="price">₹50</div></div></div>
+<div class="card"><img src="download (11).jpeg" /><div class="card-content"><h3>Onion Paratha</h3> <span>Onion पराठा</span> <div class="price">₹50</div></div></div>
+<div class="card"><img src="download (11).jpeg" /><div class="card-content"><h3>Gobhi Paratha</h3> <span>Gobhi पराठा</span> <div class="price">₹60</div></div></div>
+<div class="card"><img src="download (11).jpeg" /><div class="card-content"><h3>Paneer Paratha</h3> <span>पनीर पराठा</span> <div class="price">₹70</div></div></div>
+</Section>
+
+<section id="fast-food">
+<h2>Fast Food (फास्ट फूड)</h2>
+
+<div class="card"><img src="download (11).jpeg" /><div class="card-content"><h3>Plain Maggi</h3> <span>सादा मैगी</span> <div class="price">₹69</div></div></div>
+<div class="card"><img src="download (11).jpeg" /><div class="card-content"><h3>Veg Masala Maggi</h3> <span>वेज मसाला मैगी</span> <div class="price">₹79</div></div></div>
+<div class="card"><img src="download (11).jpeg" /><div class="card-content"><h3>Fried Rice</h3> <span>फ्राइड राइस</span> <div class="price">₹89</div></div></div>
+<div class="card"><img src="download (11).jpeg" /><div class="card-content"><h3>Chola Bhatura</h3> <span>छोला भटूरा</span> <div class="price">₹120</div></div></div>
+
+
+</section>
+
+<section id="thali">
+<h2>🥘 Thali</h2>
+
+<div class="thali">
+<h3>Main Thali ₹130</h3>
+<p>5 Roti • Sabji • Dal • Rice • Salad</p>
+</div>
+
+<div class="thali">
+<h3>Special Thali ₹180</h3>
+<p>5 Roti • Paneer • Sabji • Dal • Rice • Papad • Dahi</p>
+</div>
+</section>
+
+</div>
+
+<footer>
+Free Delivery above ₹300 | Fresh Food Takes 40 mins ❤️
+</footer>
+
+<script>
+
+function searchItems(value){
+    let cards = document.querySelectorAll(".card");
+    value = value.toLowerCase();
+
+    cards.forEach(card=>{
+        let text = card.innerText.toLowerCase();
+        if(text.includes(value)){
+            card.style.display="flex";
+        } else {
+            card.style.display="none";
+        }
+    });
+}
+
+
+function scrollToSection(id){
+    document.getElementById(id).scrollIntoView({
+        behavior:"smooth"
+    });
+}
+
+</script>
+
+</body>
+</html>
