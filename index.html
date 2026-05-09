@@ -1,180 +1,803 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Shiv Bhojnalay Menu</title>
-<link rel="stylesheet" href="style.css">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <title>Shiv Bhojnalay - Pure Veg Menu</title>
+    <link rel="stylesheet" href="styles.css">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600&display=swap" rel="stylesheet">
 </head>
 
 <body>
 
-<header>
-<h1>Shiv Bhojnalay & Restaurant</h1>
-<p>Thokar Choraha, Udaipur Rajasthan</p>
-<p>ठोकर चौराहा, उदयपुर राजस्थान</p>
-<p>Contact: 8233106918 | 9460113849</p>
-</header>
+    <!-- Splash Screen -->
+    <div id="splash" class="splash-screen">
+        <div class="splash-content">
+            <h1 class="logo-text">Shiv<span> Bhojnalay</span></h1>
+            <p>Ghar ka Khana</p>
+            <button onclick="hideSplash()" class="get-started-btn">Get Started</button>
+        </div>
+    </div>
 
-<nav>
-<button onclick="scrollToSection('veg')">Veg</button>
-<button onclick="scrollToSection('paneer')">Paneer</button>
-<button onclick="scrollToSection('dal')">Dal</button>
-<button onclick="scrollToSection('rice')">Rice</button>
-<button onclick="scrollToSection('bread')">Roti & Paratha</button>
-<button onclick="scrollToSection('fastfood')">Fast Food</button>
-<button onclick="scrollToSection('thali')">Thali</button>
-</nav>
+    <!-- Main App -->
+    <header>
+        <div class="header-top">
+            <h2 class="brand">Shiv Bhojnalay</h2>
+            <div class="lang-toggle">
+                <button id="langBtn" onclick="toggleLanguage()">हिन्दी</button>
+            </div>
+        </div>
 
-<div class="search">
-<input type="text" placeholder="Search for dishes..." onkeyup="searchItems(this.value)">
-</div>
+        <div class="trust-bar">
+            <span>🌿 100% Pure Veg</span>
+            <span>👨‍🍳 Fresh</span>
+            <span>✨ Hygienic</span>
+        </div>
 
-<div class="section" id="menu">
+        <div class="search-container">
+            <input type="text" id="searchInput" placeholder="Search for dishes..." onkeyup="filterMenu()">
+        </div>
 
-<section id="popular-dishes">
-<h2>🔥 Popular Dishes</h2>
+        <div id="categoryContainer" class="category-tabs">
+            <!-- Categories injected here -->
+        </div>
+    </header>
 
-<div class="card">
-<img src="download (11).jpeg" />
-<div class="card-content">
-<h3>Sev Tamatar</h3>
-<span>सेव टमाटर</span>
-<div class="price">₹90</div>
-<div class="tag">BESTSELLER</div>
-</div>
-</div>
+    <main id="menuGrid" class="menu-grid">
+        <!-- Dish cards injected here -->
+    </main>
 
-<div class="card">
-<img src="download (11).jpeg" />
-<div class="card-content">
-<h3>Shahi Paneer</h3>
-<span>शाही पनीर</span>
-<div class="price">₹160</div>
-<div class="tag">POPULAR</div>
-</div>
-</div>
+    <!-- Floating Cart Bar -->
+    <div id="cartBar" class="cart-bar hidden" onclick="openOrderModal()">
+        <span id="cartCount">0 Items</span>
+        <span id="cartTotal">₹0</span>
+        <button class="view-cart-btn">View Order</button>
+    </div>
 
-<div class="card">
-<img src="download (11).jpeg" />
-<div class="card-content">
-<h3>Dal Tadka</h3>
-<span>दाल तड़का</span>
-<div class="price">₹100</div>
-</div>
-</div>
-</section>
+    <!-- Order Modal -->
+    <div id="orderModal" class="modal">
+        <div class="modal-content">
+            <h3>Complete Your Order</h3>
+            <input type="text" id="custName" placeholder="Your Name" required>
+            <input type="text" id="hotelName" placeholder="Hotel Name" required>
+            <input type="text" id="roomNo" placeholder="Room Number" required>
+            <div id="orderSummary"></div>
+            <button class="whatsapp-btn" onclick="sendToWhatsApp()">Order via WhatsApp</button>
+            <button class="close-btn" onclick="closeOrderModal()">Back to Menu</button>
+        </div>
+    </div>
 
-<section id="veg-sabji">
-<h2>🍛 Main Course</h2>
-<div class="card"><img src="download (11).jpeg" /><div class="card-content"><h3>Sev Tamatar</h3><span>सेव टमाटर</span><div class="price">₹90</div><div class="tag">BESTSELLER</div></div></div>
-<div class="card"><img src="download (11).jpeg" /><div class=card-content><h3>Jeera Aloo Gravy</h3> <span>जीरा आलू</span> <div class="price">₹90</div></div></div>
-<div class="card"><img src="download (11).jpeg" /><div class=card-content><h3>Palak Aloo </h3><span>पालक आलू</span> <div class="price">₹90</div></div></div>
-<div class="card"><img src="download (11).jpeg" /><div class=card-content><h3>Aloo Mutter</h3><span>आलू मटर</span> <div class="price">₹90</div></div></div>
-<div class="card"><img src="download (11).jpeg" /><div class=card-content><h3>Mix Vegetables</h3> <span>मिक्स वेज</span> <div class="price">₹90</div></div></div>
-<div class="card"><img src="download (11).jpeg" /><div class=card-content><h3>Chana Masala</h3> <span>चना मसाला</span> <div class="price">₹90</div></div></div>
-<div class="card"><img src="download (11).jpeg" /><div class=card-content><h3>Bhindi Masala</h3> <span>भिंडी मसाला</span> <div class="price">₹90</div></div></div>
-</section>
+    <script src="script.js"></script>
+</body>
+<footer class="clean-footer">
+    <!-- Trust Badges Section -->
+    <div class="trust-container">
+        <div class="trust-item">
+            <span class="icon">🌿</span>
+            <span class="label">100% PURE VEG</span>
+        </div>
+        <div class="trust-item">
+            <span class="icon">👨‍🍳</span>
+            <span class="label">FRESHLY COOKED</span>
+        </div>
+        <div class="trust-item">
+            <span class="icon">✨</span>
+            <span class="label">HYGIENIC KITCHEN</span>
+        </div>
+    </div>
 
-<section id="paneer">
-<h2>Paneer Special (पनीर स्पेशल)</h2>
-<div class="card"><img src="download (11).jpeg" /><div class="card-content"><h3>Chola Paneer</h3> <span>छोला पनीर</span> <div class="price">₹150</div></div></div>
-<div class="card"><img src="download (11).jpeg" /><div class="card-content"><h3>Mutter Paneer</h3> <span>मटर पनीर</span> <div class="price">₹150</div></div></div>
-<div class="card"><img src="download (11).jpeg" /><div class="card-content"><h3>Palak Paneer </h3><span>पालक पनीर</span> <div class="price">₹150</div></div></div>
-<div class="card"><img src="download (11).jpeg" /><div class="card-content"><h3>Shahi Paneer</h3> <span>शाही पनीर</span> <div class="price">₹160</div></div></div>
-<div class="card"><img src="download (11).jpeg" /><div class="card-content"><h3>Malai Kofta</h3> <span>मलाई कोफ्ता</span> <div class="price">₹160</div></div></div>
-<div class="card"><img src="download (11).jpeg" /><div class="card-content"><h3>Kadai Paneer</h3> <span>कढ़ाई पनीर</span> <div class="price">₹170</div></div></div>
-<div class="card"><img src="download (11).jpeg" /><div class="card-content"><h3>Paneer Butter Masala</h3> <span>पनीर बटर मसाला</span> <div class="price">₹170</div></div></div>
-</section>
+    <!-- Branding & Info -->
+    <div class="footer-main">
+        <h3 class="footer-brand">Shiv Bhojnalay</h3>
+        <p class="serving-since">Serving happiness since 1995</p>
 
-<section id="dal">
-<h2>Dal (दाल)</h2>
-<div class="card"><img src="download (11).jpeg" /><div class="card-content"><h3>Dal Fry </h3><span>दाल फ्राई</span> <div class="price">₹90</div></div></div>
-<div class="card"><img src="download (11).jpeg" /><div class="card-content"><h3>Jain Dal</h3> <span>जैन दाल</span> <div class="price">₹90</div></div></div>
-<div class="card"><img src="download (11).jpeg" /><div class="card-content"><h3>Dal Tadka </h3><span>दाल तड़का</span> <div class="price">₹100</div></div></div>
-<div class="card"><img src="download (11).jpeg" /><div class="card-content"><h3>Butter Dal </h3><span>बटर दाल</span> <div class="price">₹100</div></div></div>
-</section>
+        <div class="hours-box">
+            <strong>Opening Hours</strong>
+            <span>11:00 AM – 11:00 PM</span>
+        </div>
+    </div>
 
-<section id="rice">
-<h2>🍚 Rice</h2>
+    <!-- Terms & Conditions Section -->
+    <div class="policy-section">
+        <p class="policy-note">
+            ⚠️ <strong>Terms & Conditions:</strong> Please verify delivery availability and applicable charges on call
+            before placing your order.
+        </p>
+    </div>
 
-<div class="card"><img src="download (11).jpeg" /><div class="card-content"><h3>Plain Rice </h3><span>सादा चावल</span> <div class="price">₹70</div></div></div>
-<div class="card"><img src="download (11).jpeg" /><div class="card-content"><h3>Jeera Rice </h3><span>जीरा राइस</span> <div class="price">₹80</div></div></div>
-<div class="card"><img src="download (11).jpeg" /><div class="card-content"><h3>Mutter Pulav</h3> <span>मटर पुलाव</span> <div class="price">₹90</div></div></div>
-<div class="card"><img src="download (11).jpeg" /><div class="card-content"><h3>Veg Pulav</h3> <span>वेज पुलाव</span> <div class="price">₹100</div></div></div>
-<div class="card"><img src="download (11).jpeg" /><div class="card-content"><h3>Veg Biryani</h3> <span>वेज बिरयानी</span> <div class="price">₹130</div></div></div>
-<div class="card"><img src="download (11).jpeg" /><div class="card-content"><h3>Paneer Pulav </h3><span>पनीर पुलाव</span> <div class="price">₹150</div></div></div>
-</section>
+    <div class="footer-contact">
+        <div class="contact-row">
+            <strong>📍 Address:</strong>
+            <p>Shop no.3, Airport Rd, near Rana Pratap railway station, Thoker Chouraha, Udaipur, Rajasthan 313003</p>
+        </div>
 
-<Section id="bread">
-<h2>Roti & Paratha (रोटी और पराठा)</h2>
+        <div class="contact-row">
+            <strong>📞 Contact Number:</strong>
+            <p>8233106918 || 9460113849</p>
+        </div>
 
-<div class="card"><img src="download (11).jpeg" /><div class="card-content"><h3>Plain Roti</h3> <span>रोटी</span> <div class="price">₹10</div></div></div>
-<div class="card"><img src="download (11).jpeg" /><div class="card-content"><h3>Butter Roti</h3> <span>बटर रोटी</span> <div class="price">₹12</div></div></div>
-<div class="card"><img src="download (11).jpeg" /><div class="card-content"><h3>Paratha</h3> <span>पराठा</span> <div class="price">₹25</div></div></div>
-<div class="card"><img src="download (11).jpeg" /><div class="card-content"><h3>Butter Paratha</h3> <span>बटर पराठा</span> <div class="price">₹30</div></div></div>
-<div class="card"><img src="download (11).jpeg" /><div class="card-content"><h3>Lacha Paratha</h3> <span>लच्छा पराठा</span> <div class="price">₹40</div></div></div>
-<div class="card"><img src="download (11).jpeg" /><div class="card-content"><h3>Aloo Paratha</h3> <span>आलू पराठा</span> <div class="price">₹50</div></div></div>
-<div class="card"><img src="download (11).jpeg" /><div class="card-content"><h3>Onion Paratha</h3> <span>Onion पराठा</span> <div class="price">₹50</div></div></div>
-<div class="card"><img src="download (11).jpeg" /><div class="card-content"><h3>Gobhi Paratha</h3> <span>Gobhi पराठा</span> <div class="price">₹60</div></div></div>
-<div class="card"><img src="download (11).jpeg" /><div class="card-content"><h3>Paneer Paratha</h3> <span>पनीर पराठा</span> <div class="price">₹70</div></div></div>
-</Section>
-
-<section id="fast-food">
-<h2>Fast Food (फास्ट फूड)</h2>
-
-<div class="card"><img src="download (11).jpeg" /><div class="card-content"><h3>Plain Maggi</h3> <span>सादा मैगी</span> <div class="price">₹69</div></div></div>
-<div class="card"><img src="download (11).jpeg" /><div class="card-content"><h3>Veg Masala Maggi</h3> <span>वेज मसाला मैगी</span> <div class="price">₹79</div></div></div>
-<div class="card"><img src="download (11).jpeg" /><div class="card-content"><h3>Fried Rice</h3> <span>फ्राइड राइस</span> <div class="price">₹89</div></div></div>
-<div class="card"><img src="download (11).jpeg" /><div class="card-content"><h3>Chola Bhatura</h3> <span>छोला भटूरा</span> <div class="price">₹120</div></div></div>
-
-
-</section>
-
-<section id="thali">
-<h2>🥘 Thali</h2>
-
-<div class="thali">
-<h3>Main Thali ₹130</h3>
-<p>5 Roti • Sabji • Dal • Rice • Salad</p>
-</div>
-
-<div class="thali">
-<h3>Special Thali ₹180</h3>
-<p>5 Roti • Paneer • Sabji • Dal • Rice • Papad • Dahi</p>
-</div>
-</section>
-
-</div>
-
-<footer>
-Free Delivery above ₹300 | Fresh Food Takes 40 mins ❤️
+        <!-- Primary Call Button -->
+        <a href="tel:8233106918" class="footer-call-btn">
+            <span>Call Now to Order</span>
+        </a>
+    </div>
+    <!-- Footer Bottom -->
+    <div class="footer-bottom">
+        <p>© 2026 Shiv Bhojnalay. All Rights Reserved.</p>
+        <p class="developer-tag">Developed with ❤️ for Udaipur Foodies</p>
+    </div>
 </footer>
-
 <script>
+    // Replace with your actual Google Sheet ID and Tab Name
+const SHEET_ID = '1LCjgdeoXZZvkjMGypTmx7fU9DGELoLhjD4sFmNyLhT0';
+const SHEET_NAME = 'Sheet1';
+const API_URL = `https://opensheet.elk.sh/${SHEET_ID}/${SHEET_NAME}`;
 
-function searchItems(value){
-    let cards = document.querySelectorAll(".card");
-    value = value.toLowerCase();
+let menuData = [];
+let cart = [];
+let currentLang = 'EN'; // Default English
 
-    cards.forEach(card=>{
-        let text = card.innerText.toLowerCase();
-        if(text.includes(value)){
-            card.style.display="flex";
-        } else {
-            card.style.display="none";
+document.addEventListener('DOMContentLoaded', () => {
+    const startBtn = document.querySelector('.get-started-btn');
+    if (startBtn) {
+        startBtn.addEventListener('click', () => {
+            console.log("Button clicked!"); // Check your browser console (F12) for this
+            hideSplash();
+        });
+    }
+});
+
+function hideSplash() {
+    const splash = document.getElementById('splash');
+    if (splash) {
+        splash.style.opacity = '0';
+        // Wait for the fade out, then remove from layout
+        setTimeout(() => {
+            splash.style.display = 'none';
+        }, 500);
+    }
+}
+
+
+// 1. Fetch menu
+async function loadMenu() {
+    try {
+        const response = await fetch(API_URL);
+        const data = await response.json();
+
+        // OpenSheet uses the first row as keys automatically
+        menuData = data.map(item => ({
+            category: item.Category,
+            nameHI: item.Dish_Name_HI,
+            nameEN: item.Dish_Name_EN,
+            descHI: item.Description_HI,
+            descEN: item.Description_EN,
+            price: item.Price,
+            image: item.Image_File,
+            status: item.Status
+        }));
+
+        renderCategories();
+        renderMenu('All');
+    } catch (error) {
+        console.error("Error loading menu:", error);
+        document.getElementById('menuGrid').innerHTML = "<p style='padding:20px;'>Failed to load menu. Please check your internet or Sheet settings.</p>";
+    }
+}
+
+// 2. Render UI
+function renderMenu(categoryFilter, searchTerm = '') {
+    const grid = document.getElementById('menuGrid');
+    grid.innerHTML = '';
+
+    const filtered = menuData.filter(item => {
+        const matchesCat = categoryFilter === 'All' || item.category === categoryFilter;
+        const nameMatch = item[`name${currentLang}`].toLowerCase().includes(searchTerm.toLowerCase());
+        return matchesCat && nameMatch;
+    });
+filtered.forEach((item, index) => {
+    const isAvailable = item.status === 'Available';
+    const dishName = item[`name${currentLang}`];
+    
+    // Check Category (English) OR Hindi Name OR English Name for the keyword
+    const isThali = item.category.includes("Thali") || 
+                    item.nameEN.includes("Thali") || 
+                    item.nameHI.includes("थाली");
+
+    let thaliDetails = "";
+    if (isThali) {
+        // Use the English name (item.nameEN) for the logic check 
+        // so it works even if the user is looking at the Hindi UI
+        if (item.nameEN.includes("Main")) {
+            thaliDetails = currentLang === 'EN' 
+                ? "5 Roti, Sabji, Dal, Rice, Salad" 
+                : "5 रोटी, सब्जी, दाल, चावल, सलाद";
+        } else if (item.nameEN.includes("Special")) {
+            thaliDetails = currentLang === 'EN' 
+                ? "5 Roti, Mutter Paneer, Sabji, Dal, Jeera Rice, Salad, Papad, Achar, Dahi" 
+                : "5 रोटी, मटर पनीर, सब्जी, दाल, जीरा राइस, सलाद, पापड़, अचार, दही";
         }
-    });
+    }
+
+    const card = document.createElement('div');
+    card.className = `dish-card ${!isAvailable ? 'sold-out' : ''}`;
+    
+    card.innerHTML = `
+        ${!isAvailable ? '<span class="sold-out-tag">Sold Out</span>' : ''}
+        <img src="${item.image}" class="dish-img" loading="lazy">
+        <div class="dish-info">
+            <div>
+                <h4 class="${isThali ? 'thali-title' : ''}">${dishName}</h4>
+                ${thaliDetails ? `<p class="thali-desc">${thaliDetails}</p>` : ''}
+            </div>
+            <div class="price-row">
+                <span class="price">₹${item.price}</span>
+                ${isAvailable ? `<button class="add-btn" onclick="addToCart(${index})">ADD</button>` : ''}
+            </div>
+        </div>
+    `;
+    grid.appendChild(card);
+});
 }
 
+// Add this so the HTML onclick can find the function
+window.setCategory = function (el, cat) {
+    // 1. Remove 'active' class from all tabs
+    document.querySelectorAll('.category-tab').forEach(t => t.classList.remove('active'));
 
-function scrollToSection(id){
-    document.getElementById(id).scrollIntoView({
-        behavior:"smooth"
-    });
+    // 2. Add 'active' class to the clicked tab
+    el.classList.add('active');
+
+    // 3. Filter the menu
+    renderMenu(cat);
+};
+
+function renderCategories() {
+    const container = document.getElementById('categoryContainer');
+    const cats = ['All', ...new Set(menuData.map(i => i.category))];
+    container.innerHTML = cats.map(cat =>
+        `<div class="category-tab" onclick="setCategory(this, '${cat}')">${cat}</div>`
+    ).join('');
+    container.firstChild.classList.add('active');
 }
+
+// 3. Logic Functions
+function toggleLanguage() {
+    currentLang = currentLang === 'EN' ? 'HI' : 'EN';
+    document.getElementById('langBtn').innerText = currentLang === 'EN' ? 'हिन्दी' : 'English';
+    renderMenu('All');
+}
+
+function addToCart(index) {
+    const item = menuData[index];
+    cart.push(item);
+    updateCartBar();
+}
+
+function updateCartBar() {
+    const bar = document.getElementById('cartBar');
+    if (cart.length > 0) {
+        bar.classList.remove('hidden');
+        document.getElementById('cartCount').innerText = `${cart.length} Items`;
+        const total = cart.reduce((sum, item) => sum + parseInt(item.price), 0);
+        document.getElementById('cartTotal').innerText = `₹${total}`;
+    }
+}
+
+function sendToWhatsApp() {
+    const name = document.getElementById('custName').value;
+    const hotel = document.getElementById('hotelName').value;
+    const room = document.getElementById('roomNo').value;
+
+    if (!name || !hotel || !room) return alert("Please fill all details");
+
+    let orderText = `*New Order from ${name}*\nHotel: ${hotel} | Room: ${room}\n----------\n`;
+    let total = 0;
+    cart.forEach(item => {
+        orderText += `- ${item[`name${currentLang}`]} (₹${item.price})\n`;
+        total += parseInt(item.price);
+    });
+    orderText += `----------\n*Total: ₹${total}*\n\n_Please confirm by calling within 10 mins._`;
+
+    const encoded = encodeURIComponent(orderText);
+    window.open(`https://wa.me/919755962083?text=${encoded}`); // Add owner phone number
+}
+
+// Helpers
+function hideSplash() {
+    const splash = document.getElementById('splash');
+    // This moves it up and then removes it from the view entirely
+    splash.style.opacity = '0';
+    splash.style.pointerEvents = 'none';
+    setTimeout(() => {
+        splash.style.display = 'none';
+    }, 500); // Wait for the fade-out to finish
+}
+
+function filterMenu() {
+    const term = document.getElementById('searchInput').value;
+    renderMenu('All', term);
+}
+function openOrderModal() { document.getElementById('orderModal').style.display = 'flex'; }
+function closeOrderModal() { document.getElementById('orderModal').style.display = 'none'; }
+
+loadMenu();
+
 
 </script>
 
-</body>
+<style>
+    :root {
+    --primary: #FF8C00;
+    /* Saffron Orange */
+    --dark: #1a1a1a;
+    --light: #f9f9f9;
+    --green: #27ae60;
+    --white: #ffffff;
+}
+
+* {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+    font-family: 'Poppins', sans-serif;
+}
+
+body {
+    background-color: var(--light);
+    padding-bottom: 80px;
+}
+
+/* Splash Screen */
+.splash-screen {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: var(--primary);
+    display: flex;
+    flex-direction: column;
+    /* Stack elements vertically */
+    align-items: center;
+    justify-content: center;
+    z-index: 9999;
+    /* Higher than everything else */
+    transition: opacity 0.5s ease-in-out;
+}
+
+.logo-text {
+    font-size: 2.5rem;
+    margin-bottom: 10px;
+}
+
+.logo-text span {
+    font-weight: 300;
+}
+
+.get-started-btn {
+    position: relative;
+    /* Adds layering priority */
+    z-index: 10000;
+    cursor: pointer;
+    pointer-events: auto;
+    /* Force it to accept clicks */
+    padding: 15px 45px;
+    margin-top: 30px;
+    border-radius: 30px;
+    border: none;
+    background: white;
+    color: var(--primary);
+    font-weight: bold;
+    font-size: 1.2rem;
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
+}
+
+/* Header & Search */
+header {
+    background: var(--white);
+    padding: 15px;
+    position: sticky;
+    top: 0;
+    z-index: 100;
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+}
+
+.header-top {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 10px;
+}
+
+.brand {
+    color: #d32f2f;
+    font-weight: 600;
+}
+
+.lang-toggle button {
+    padding: 5px 15px;
+    border-radius: 15px;
+    border: 1px solid var(--primary);
+    background: none;
+    color: var(--primary);
+}
+
+.trust-bar {
+    display: flex;
+    justify-content: space-between;
+    font-size: 0.75rem;
+    color: #666;
+    margin-bottom: 10px;
+}
+
+.search-container input {
+    width: 100%;
+    padding: 12px;
+    border-radius: 10px;
+    border: 1px solid #ddd;
+    background: #f1f1f1;
+}
+
+.category-tabs {
+    display: flex;
+    overflow-x: auto;
+    gap: 10px;
+    padding: 10px 0;
+    scrollbar-width: none;
+}
+
+.category-tab {
+    padding: 8px 18px;
+    background: #eee;
+    border-radius: 20px;
+    white-space: nowrap;
+    font-size: 0.9rem;
+    cursor: pointer;
+}
+
+.category-tab.active {
+    background: var(--primary);
+    color: white;
+}
+
+/* Menu Grid */
+.menu-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 10px;
+    padding: 10px;
+}
+
+.dish-info h4 {
+    font-size: 0.95rem;
+    font-weight: 600;
+    margin-bottom: 8px;
+    height: 2.8em; /* Exactly two lines of text */
+    overflow: hidden;
+    display: -webkit-box;
+    -webkit-line-clamp: 2; /* Limits text to 2 lines */
+    -webkit-box-orient: vertical;
+    line-height: 1.4;
+    color: #333;
+}
+
+.dish-img {
+    width: 100%;
+    height: 120px;
+    object-fit: cover;
+}
+
+.dish-info {
+    padding: 10px;
+}
+
+.dish-info h4 {
+    font-size: 0.95rem;
+    font-weight: 600;
+    margin-bottom: 8px;
+    height: 2.8em; /* Exactly two lines of text */
+    overflow: hidden;
+    display: -webkit-box;
+    -webkit-line-clamp: 2; /* Limits text to 2 lines */
+    -webkit-box-orient: vertical;
+    line-height: 1.4;
+    color: #333;
+}
+
+.price-row {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.price {
+    font-weight: 600;
+    color: var(--dark);
+}
+
+.add-btn {
+    background: var(--green);
+    color: white;
+    border: none;
+    padding: 5px 12px;
+    border-radius: 5px;
+    font-weight: bold;
+}
+
+/* Sold Out Overlay */
+.sold-out {
+    opacity: 0.5;
+    filter: grayscale(1);
+}
+
+.sold-out-tag {
+    position: absolute;
+    top: 10px;
+    left: 10px;
+    background: rgba(0, 0, 0, 0.7);
+    color: white;
+    padding: 2px 8px;
+    font-size: 0.7rem;
+    border-radius: 4px;
+}
+
+/* Cart & Modal */
+.cart-bar {
+    position: fixed;
+    bottom: 20px;
+    left: 5%;
+    width: 90%;
+    background: var(--dark);
+    color: white;
+    padding: 15px 20px;
+    border-radius: 15px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    z-index: 500;
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3);
+}
+
+.hidden {
+    display: none;
+}
+
+.modal {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0, 0, 0, 0.8);
+    display: none;
+    z-index: 2000;
+    align-items: center;
+    justify-content: center;
+}
+
+.modal-content {
+    background: white;
+    width: 90%;
+    padding: 20px;
+    border-radius: 15px;
+    text-align: center;
+}
+
+.modal-content input {
+    width: 100%;
+    padding: 12px;
+    margin: 10px 0;
+    border: 1px solid #ddd;
+    border-radius: 8px;
+}
+
+.whatsapp-btn {
+    width: 100%;
+    background: #25D366;
+    color: white;
+    border: none;
+    padding: 15px;
+    border-radius: 10px;
+    font-weight: bold;
+    margin-top: 10px;
+}
+
+.close-btn {
+    background: none;
+    border: none;
+    color: #666;
+    margin-top: 15px;
+    cursor: pointer;
+}
+
+/* White-Focused Footer Design */
+.clean-footer {
+    background: #ffffff;
+    padding: 40px 20px;
+    border-top: 1px solid #f0f0f0;
+    border-radius: 1%;
+    text-align: center;
+    margin-top: 20px;
+}
+
+/* Trust Badges - Soft & Professional */
+.trust-container {
+    display: flex;
+    justify-content: space-around;
+    padding-bottom: 30px;
+    margin-bottom: 30px;
+    border-bottom: 2px dashed #f5f5f5;
+}
+
+.trust-item {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.trust-item .icon {
+    font-size: 1.6rem;
+    margin-bottom: 8px;
+}
+
+.trust-item .label {
+    font-size: 0.65rem;
+    font-weight: 700;
+    color: #888;
+    letter-spacing: 0.5px;
+}
+
+/* Branding Colors */
+.footer-brand {
+    color: #D32F2F; /* Traditional Red */
+    font-size: 1.3rem;
+    margin-bottom: 5px;
+}
+
+.serving-since {
+    font-size: 0.85rem;
+    color: #999;
+    margin-bottom: 25px;
+}
+
+/* Opening Hours Pill */
+.hours-box {
+    display: inline-block;
+    background: #fdf2f2;
+    padding: 10px 25px;
+    border-radius: 50px;
+    border: 1px solid #fee2e2;
+    margin-bottom: 30px;
+}
+
+.hours-box strong {
+    display: block;
+    font-size: 0.75rem;
+    color: #D32F2F;
+    text-transform: uppercase;
+}
+
+.hours-box span {
+    font-size: 0.9rem;
+    color: #444;
+}
+
+/* Revised Delivery / T&C Message */
+.policy-section {
+    background: #f9f9f9;
+    padding: 15px;
+    border-radius: 12px;
+    margin-bottom: 30px;
+}
+
+.policy-note {
+    font-size: 0.85rem;
+    color: #666;
+    line-height: 1.5;
+}
+
+.policy-note strong {
+    color: #333;
+}
+
+/* Bottom Credits */
+.footer-bottom {
+    font-size: 0.7rem;
+    color: #bbb;
+    line-height: 1.8;
+}
+
+.developer-tag {
+    color: #afa6a6;
+}
+
+/* Standard Title */
+.dish-info h4 {
+    font-size: 0.95rem;
+    font-weight: 600;
+    color: #333;
+    margin-bottom: 8px;
+}
+
+/* Keyword-based override for Thali */
+.thali-title {
+    font-size: 0.85rem !important; /* Smaller to fit the box */
+    line-height: 1.2;
+    color: #D32F2F; /* Optional: Slight color shift to highlight Thalis */
+}
+
+/* Description styling for the keyword items */
+.thali-desc {
+    font-size: 0.72rem;
+    color: #777;
+    line-height: 1.4;
+    margin-top: 2px;
+    font-weight: 400;
+    border-top: 1px solid #f0f0f0;
+    padding-top: 4px;
+}
+
+/* Ensure the card accommodates the extra text */
+.dish-card {
+    min-height: 220px; 
+    display: flex;
+    flex-direction: column;
+}
+
+.footer-contact {
+    margin: 25px 0;
+    padding: 0 10px;
+}
+
+.contact-row {
+    margin-bottom: 15px;
+}
+
+.contact-row strong {
+    display: block;
+    font-size: 0.8rem;
+    color: #D32F2F;
+    margin-bottom: 3px;
+    text-transform: uppercase;
+}
+
+.contact-row p {
+    font-size: 0.85rem;
+    color: #555;
+    line-height: 1.4;
+    max-width: 300px;
+    margin: 0 auto;
+}
+
+/* Professional Call Button */
+.footer-call-btn {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    background-color: #27ae60; /* Green for Call/Success */
+    color: white;
+    text-decoration: none;
+    padding: 12px 30px;
+    border-radius: 50px;
+    font-weight: 600;
+    font-size: 0.9rem;
+    margin-top: 10px;
+    box-shadow: 0 4px 12px rgba(39, 174, 96, 0.2);
+    transition: transform 0.2s ease;
+}
+
+.footer-call-btn:active {
+    transform: scale(0.95);
+}
+
+.footer-call-btn::before {
+    content: "📞";
+    margin-right: 8px;
+}
+
+
+</style>
+
 </html>
