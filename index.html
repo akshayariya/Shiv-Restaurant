@@ -7,19 +7,21 @@
     <title>Shiv Bhojnalay - Pure Veg Menu</title>
     <link rel="stylesheet" href="styles.css">
     <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Great+Vibes&family=Kalam:wght@700&family=Pinyon+Script&display=swap" rel="stylesheet">
 </head>
 
 <body>
 
     <!-- Splash Screen -->
-    <div id="splash" class="splash-screen">
-        <div class="splash-content">
-            <h1 class="logo-text">Shiv<span> Bhojnalay</span></h1>
-            <p>Ghar ka Khana</p>
-            <button onclick="hideSplash()" class="get-started-btn">Get Started</button>
-        </div>
+<div id="splash">
+    <div class="splash-container">
+        <div class="brand-logo-placeholder">SB</div>
+        <h1 class="brand-name">SHIV BHOJNALAY</h1>
+        <p class="brand-tagline">100% PURE VEGETARIAN🌿</p>
+        
+        <button class="get-started-btn" onclick="hideSplash()">View Menu</button>
     </div>
-
+</div>
     <!-- Main App -->
     <header>
         <div class="header-top">
@@ -55,14 +57,23 @@
         <button class="view-cart-btn">View Order</button>
     </div>
 
-    <!-- Order Modal -->
     <div id="orderModal" class="modal">
         <div class="modal-content">
-            <h3>Complete Your Order</h3>
+            <h3 style="color: #D32F2F;">Review Your Order</h3>
+
+            <div id="cartReviewList" class="cart-review-list"></div>
+
+            <div class="cart-total-display">
+                <strong>Total Amount: </strong>
+                <span id="modalTotal">₹0</span>
+            </div>
+
+            <hr style="margin: 15px 0; border: 0; border-top: 1px solid #eee;">
+
             <input type="text" id="custName" placeholder="Your Name" required>
             <input type="text" id="hotelName" placeholder="Hotel Name" required>
             <input type="text" id="roomNo" placeholder="Room Number" required>
-            <div id="orderSummary"></div>
+
             <button class="whatsapp-btn" onclick="sendToWhatsApp()">Order via WhatsApp</button>
             <button class="close-btn" onclick="closeOrderModal()">Back to Menu</button>
         </div>
@@ -128,8 +139,15 @@
         <p class="developer-tag">Developed with ❤️ for Udaipur Foodies</p>
     </div>
 </footer>
+
+
+<!-- SCRIPT LOCK -->
 <script>
-    // Replace with your actual Google Sheet ID and Tab Name
+    /**
+ * Sheet details link and id and constants
+ */
+
+// Replace with your actual Google Sheet ID and Tab Name
 const SHEET_ID = '1LCjgdeoXZZvkjMGypTmx7fU9DGELoLhjD4sFmNyLhT0';
 const SHEET_NAME = 'Sheet1';
 const API_URL = `https://opensheet.elk.sh/${SHEET_ID}/${SHEET_NAME}`;
@@ -138,6 +156,9 @@ let menuData = [];
 let cart = [];
 let currentLang = 'EN'; // Default English
 
+/**
+ * Event listner COMPLETE
+ */
 document.addEventListener('DOMContentLoaded', () => {
     const startBtn = document.querySelector('.get-started-btn');
     if (startBtn) {
@@ -148,19 +169,12 @@ document.addEventListener('DOMContentLoaded', () => {
     }
 });
 
-function hideSplash() {
-    const splash = document.getElementById('splash');
-    if (splash) {
-        splash.style.opacity = '0';
-        // Wait for the fade out, then remove from layout
-        setTimeout(() => {
-            splash.style.display = 'none';
-        }, 500);
-    }
-}
 
 
-// 1. Fetch menu
+// 1. Fetch and clear the menu data from sheet COMPLETE
+/**
+ * A fuction to load the the data from sheet to webpage
+ */
 async function loadMenu() {
     try {
         const response = await fetch(API_URL);
@@ -185,8 +199,15 @@ async function loadMenu() {
         document.getElementById('menuGrid').innerHTML = "<p style='padding:20px;'>Failed to load menu. Please check your internet or Sheet settings.</p>";
     }
 }
+/**
+ * A fuction to filter a menu on page by category, Availability, thali name update 
+ */
 
-// 2. Render UI
+
+// 2. Render UI COMPLETE
+/**
+ * A render function to make all menu appear on page physically and logically correct
+ */
 function renderMenu(categoryFilter, searchTerm = '') {
     const grid = document.getElementById('menuGrid');
     grid.innerHTML = '';
@@ -196,34 +217,34 @@ function renderMenu(categoryFilter, searchTerm = '') {
         const nameMatch = item[`name${currentLang}`].toLowerCase().includes(searchTerm.toLowerCase());
         return matchesCat && nameMatch;
     });
-filtered.forEach((item, index) => {
-    const isAvailable = item.status === 'Available';
-    const dishName = item[`name${currentLang}`];
-    
-    // Check Category (English) OR Hindi Name OR English Name for the keyword
-    const isThali = item.category.includes("Thali") || 
-                    item.nameEN.includes("Thali") || 
-                    item.nameHI.includes("थाली");
+    filtered.forEach((item, index) => {
+        const isAvailable = item.status === 'Available';
+        const dishName = item[`name${currentLang}`];
 
-    let thaliDetails = "";
-    if (isThali) {
-        // Use the English name (item.nameEN) for the logic check 
-        // so it works even if the user is looking at the Hindi UI
-        if (item.nameEN.includes("Main")) {
-            thaliDetails = currentLang === 'EN' 
-                ? "5 Roti, Sabji, Dal, Rice, Salad" 
-                : "5 रोटी, सब्जी, दाल, चावल, सलाद";
-        } else if (item.nameEN.includes("Special")) {
-            thaliDetails = currentLang === 'EN' 
-                ? "5 Roti, Mutter Paneer, Sabji, Dal, Jeera Rice, Salad, Papad, Achar, Dahi" 
-                : "5 रोटी, मटर पनीर, सब्जी, दाल, जीरा राइस, सलाद, पापड़, अचार, दही";
+        // Check Category (English) OR Hindi Name OR English Name for the keyword
+        const isThali = item.category.includes("Thali") ||
+            item.nameEN.includes("Thali") ||
+            item.nameHI.includes("थाली");
+
+        let thaliDetails = "";
+        if (isThali) {
+            // Use the English name (item.nameEN) for the logic check 
+            // so it works even if the user is looking at the Hindi UI
+            if (item.nameEN.includes("Main")) {
+                thaliDetails = currentLang === 'EN'
+                    ? "5 Roti, Sabji, Dal, Rice, Salad"
+                    : "5 रोटी, सब्जी, दाल, चावल, सलाद";
+            } else if (item.nameEN.includes("Special")) {
+                thaliDetails = currentLang === 'EN'
+                    ? "5 Roti, Mutter Paneer, Sabji, Dal, Jeera Rice, Salad, Papad, Achar, Dahi"
+                    : "5 रोटी, मटर पनीर, सब्जी, दाल, जीरा राइस, सलाद, पापड़, अचार, दही";
+            }
         }
-    }
 
-    const card = document.createElement('div');
-    card.className = `dish-card ${!isAvailable ? 'sold-out' : ''}`;
-    
-    card.innerHTML = `
+        const card = document.createElement('div');
+        card.className = `dish-card ${!isAvailable ? 'sold-out' : ''}`;
+
+        card.innerHTML = `
         ${!isAvailable ? '<span class="sold-out-tag">Sold Out</span>' : ''}
         <img src="${item.image}" class="dish-img" loading="lazy">
         <div class="dish-info">
@@ -233,12 +254,14 @@ filtered.forEach((item, index) => {
             </div>
             <div class="price-row">
                 <span class="price">₹${item.price}</span>
-                ${isAvailable ? `<button class="add-btn" onclick="addToCart(${index})">ADD</button>` : ''}
-            </div>
+            
+            ${isAvailable ? `<button class="add-btn" onclick="addToCart('${item.nameEN.replace(/'/g, "\\'")}')">ADD</button>` : ''}
+
+                </div>
         </div>
     `;
-    grid.appendChild(card);
-});
+        grid.appendChild(card);
+    });
 }
 
 // Add this so the HTML onclick can find the function
@@ -262,27 +285,114 @@ function renderCategories() {
     container.firstChild.classList.add('active');
 }
 
-// 3. Logic Functions
-function toggleLanguage() {
-    currentLang = currentLang === 'EN' ? 'HI' : 'EN';
-    document.getElementById('langBtn').innerText = currentLang === 'EN' ? 'हिन्दी' : 'English';
-    renderMenu('All');
-}
 
-function addToCart(index) {
-    const item = menuData[index];
-    cart.push(item);
+// 3. Logic Functions for cart  COMPLETE
+// Updated addToCart using Name instead of Index
+function addToCart(nameEN) {
+    // 1. Find the actual dish from the master menuData using the name
+    const dish = menuData.find(item => item.nameEN === nameEN);
+
+    if (!dish) return; // Safety check
+
+    // 2. Check if this dish is already in the cart
+    const existingItem = cart.find(item => item.nameEN === nameEN);
+
+    if (existingItem) {
+        existingItem.qty += 1;
+    } else {
+        // 3. Add as a new entry
+        cart.push({
+            nameEN: dish.nameEN,
+            nameHI: dish.nameHI,
+            price: parseInt(dish.price),
+            qty: 1
+        });
+    }
     updateCartBar();
 }
 
+// Fixed updateCartBar to handle numbers correctly
 function updateCartBar() {
     const bar = document.getElementById('cartBar');
+    if (!bar) return;
+
     if (cart.length > 0) {
         bar.classList.remove('hidden');
-        document.getElementById('cartCount').innerText = `${cart.length} Items`;
-        const total = cart.reduce((sum, item) => sum + parseInt(item.price), 0);
-        document.getElementById('cartTotal').innerText = `₹${total}`;
+        const totalQty = cart.reduce((sum, item) => sum + item.qty, 0);
+        const totalAmount = cart.reduce((sum, item) => sum + (item.price * item.qty), 0);
+
+        document.getElementById('cartCount').innerText = `${totalQty} Items`;
+        document.getElementById('cartTotal').innerText = `₹${totalAmount}`;
+    } else {
+        bar.classList.add('hidden');
     }
+}
+
+// Updated renderCartReview for correct logic
+function renderCartReview() {
+    const listContainer = document.getElementById('cartReviewList');
+    const modalTotalElem = document.getElementById('modalTotal');
+    let total = 0;
+
+    if (cart.length === 0) {
+        listContainer.innerHTML = "<p style='text-align:center; padding:20px; color:#999;'>Your cart is empty</p>";
+        modalTotalElem.innerText = "₹0";
+        return;
+    }
+
+    listContainer.innerHTML = cart.map((item, index) => {
+        const subtotal = item.price * item.qty;
+        total += subtotal;
+        return `
+            <div class="review-item" style="display:flex; justify-content:space-between; align-items:center; padding:12px 0; border-bottom:1px solid #eee;">
+                <div style="flex:1;">
+                    <div style="font-weight:600;">${item[`name${currentLang}`]}</div>
+                    <div style="font-size:0.8rem; color:#666;">₹${item.price}</div>
+                </div>
+                <div style="display:flex; align-items:center; gap:10px;">
+                    <button class="qty-btn" onclick="changeQty(${index}, -1)" >-</button>
+                    <span style="font-weight:bold; width:20px; text-align:center;">${item.qty}</span>
+                    <button class="qty-btn" onclick="changeQty(${index}, 1)" >+</button>
+                    <button onclick="removeFromCart(${index})" style="background:none; border:none; cursor:pointer; font-size:1.5rem;">🗑️</button>
+                </div>
+            </div>
+        `;
+    }).join('');
+
+    modalTotalElem.innerText = `₹${total}`;
+}
+
+window.changeQty = function (index, delta) {
+    if (cart[index]) {
+        if (cart[index].qty + delta >= 1) {
+            cart[index].qty += delta;
+        }
+        updateCartBar();
+        renderCartReview();
+    }
+};
+
+window.removeFromCart = function (index) {
+    cart.splice(index, 1);
+    updateCartBar();
+    renderCartReview();
+    if (cart.length === 0) closeOrderModal();
+};
+
+
+
+/**
+ * Model editing functions and whatsapp message sender function  COMPLETE
+ */
+
+function openOrderModal() {
+    if (cart.length === 0) return;
+    document.getElementById('orderModal').style.display = 'flex';
+    renderCartReview();
+}
+
+function closeOrderModal() {
+    document.getElementById('orderModal').style.display = 'none';
 }
 
 function sendToWhatsApp() {
@@ -294,17 +404,27 @@ function sendToWhatsApp() {
 
     let orderText = `*New Order from ${name}*\nHotel: ${hotel} | Room: ${room}\n----------\n`;
     let total = 0;
+
     cart.forEach(item => {
-        orderText += `- ${item[`name${currentLang}`]} (₹${item.price})\n`;
-        total += parseInt(item.price);
+        const itemTotal = item.price * item.qty;
+        orderText += `- ${item[`name${currentLang}`]} x ${item.qty} = ₹${itemTotal}\n`;
+        total += itemTotal;
     });
-    orderText += `----------\n*Total: ₹${total}*\n\n_Please confirm by calling within 10 mins._`;
+
+    orderText += `----------\n*Total: ₹${total}*\n\n_Please confirm delivery charges on call._`;
 
     const encoded = encodeURIComponent(orderText);
-    window.open(`https://wa.me/919755962083?text=${encoded}`); // Add owner phone number
+    // Primary number as per your last request
+    window.open(`https://wa.me/918233106918?text=${encoded}`);
 }
 
-// Helpers
+
+
+// Helpers functions COMPLETE
+
+/**
+ * Function to hide the front page splash when <button onclick="hideSplash()" class="get-started-btn">Get Started</button> is clicked
+ */
 function hideSplash() {
     const splash = document.getElementById('splash');
     // This moves it up and then removes it from the view entirely
@@ -315,18 +435,35 @@ function hideSplash() {
     }, 500); // Wait for the fade-out to finish
 }
 
+
+/**
+ * Function to filter the menu using a search bar work on input and enter at  <input type="text" id="searchInput" placeholder="Search for dishes..." onkeyup="filterMenu()">
+ */
 function filterMenu() {
     const term = document.getElementById('searchInput').value;
     renderMenu('All', term);
 }
-function openOrderModal() { document.getElementById('orderModal').style.display = 'flex'; }
-function closeOrderModal() { document.getElementById('orderModal').style.display = 'none'; }
 
+/**
+ * Function to change the language of menu items call when <button id="langBtn" onclick="toggleLanguage()">हिन्दी</button>
+ */
+function toggleLanguage() {
+    currentLang = currentLang === 'EN' ? 'HI' : 'EN';
+    document.getElementById('langBtn').innerText = currentLang === 'EN' ? 'हिन्दी' : 'English';
+    renderMenu('All');
+}
+
+/**
+ * Calling a loadmenu() fuction to get the full menu on page open
+ */
 loadMenu();
+
+
 
 
 </script>
 
+<!-- STYLE LOCK -->
 <style>
     :root {
     --primary: #FF8C00;
@@ -350,48 +487,84 @@ body {
 }
 
 /* Splash Screen */
-.splash-screen {
+#splash {
     position: fixed;
     top: 0;
     left: 0;
     width: 100%;
     height: 100%;
-    background: var(--primary);
+    background-color: #ffffff; /* Clean White */
     display: flex;
-    flex-direction: column;
-    /* Stack elements vertically */
+    justify-content: center;
+    align-items: center;
+    z-index: 10000;
+    transition: opacity 0.6s ease-in-out;
+}
+
+.splash-container {
+    text-align: center;
+    animation: fadeIn 1s ease-in;
+}
+
+/* A simple red circular logo placeholder */
+.brand-logo-placeholder {
+    width: 180px;
+    height: 180px;
+    background-color: #ff8c00; /* Red */
+    color: white;
+    font-size: 4rem;
+    font-weight: 800;
+    display: flex;
     align-items: center;
     justify-content: center;
-    z-index: 9999;
-    /* Higher than everything else */
-    transition: opacity 0.5s ease-in-out;
+    border-radius: 50%;
+    margin: 0 auto 20px;
+    box-shadow: 0 4px 15px rgba(211, 47, 47, 0.2);
+    font-family: 'Great Vibes', cursive; /* Elegant SB initials */
+    padding-right: 12%;
+    padding-left: 10%;
 }
 
-.logo-text {
-    font-size: 2.5rem;
-    margin-bottom: 10px;
+.brand-name {
+    color: #ff8c00;
+    font-size: 2.4rem;
+    letter-spacing: 2px;
+    margin-bottom: 5px;
+    font-weight: 900;
 }
 
-.logo-text span {
-    font-weight: 300;
-}
-
-.get-started-btn {
-    position: relative;
-    /* Adds layering priority */
-    z-index: 10000;
-    cursor: pointer;
-    pointer-events: auto;
-    /* Force it to accept clicks */
-    padding: 15px 45px;
-    margin-top: 30px;
-    border-radius: 30px;
-    border: none;
-    background: white;
-    color: var(--primary);
+.brand-tagline {
+    color: #666;
+    font-size: 0.9rem;
+    margin-bottom: 40px;
+    letter-spacing: 1px;
     font-weight: bold;
-    font-size: 1.2rem;
-    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
+    color: #6dd325;
+}
+
+/* The Awesome Red Button */
+.get-started-btn {
+    background-color: #ff8c00;
+    color: #ffffff;
+    border: none;
+    padding: 16px 50px;
+    font-size: 1rem;
+    font-weight: 700;
+    border-radius: 50px;
+    text-transform: uppercase;
+    cursor: pointer;
+    box-shadow: 0 6px 20px rgba(211, 47, 47, 0.3);
+    transition: all 0.3s ease;
+}
+
+.get-started-btn:active {
+    transform: scale(0.95);
+    background-color: #B71C1C;
+}
+
+@keyframes fadeIn {
+    from { opacity: 0; transform: translateY(10px); }
+    to { opacity: 1; transform: translateY(0); }
 }
 
 /* Header & Search */
@@ -470,18 +643,7 @@ header {
     padding: 10px;
 }
 
-.dish-info h4 {
-    font-size: 0.95rem;
-    font-weight: 600;
-    margin-bottom: 8px;
-    height: 2.8em; /* Exactly two lines of text */
-    overflow: hidden;
-    display: -webkit-box;
-    -webkit-line-clamp: 2; /* Limits text to 2 lines */
-    -webkit-box-orient: vertical;
-    line-height: 1.4;
-    color: #333;
-}
+
 
 .dish-img {
     width: 100%;
@@ -497,10 +659,16 @@ header {
     font-size: 0.95rem;
     font-weight: 600;
     margin-bottom: 8px;
-    height: 2.8em; /* Exactly two lines of text */
+    height: 2.8em;
+    /* Exactly two lines of text */
     overflow: hidden;
     display: -webkit-box;
-    -webkit-line-clamp: 2; /* Limits text to 2 lines */
+    -webkit-box-orient: vertical;
+    -webkit-line-clamp: 2;
+    /* Legacy support */
+    line-clamp: 2;
+    /* Standard property */
+    overflow: hidden;
     -webkit-box-orient: vertical;
     line-height: 1.4;
     color: #333;
@@ -651,7 +819,8 @@ header {
 
 /* Branding Colors */
 .footer-brand {
-    color: #D32F2F; /* Traditional Red */
+    color: #D32F2F;
+    /* Traditional Red */
     font-size: 1.3rem;
     margin-bottom: 5px;
 }
@@ -723,9 +892,11 @@ header {
 
 /* Keyword-based override for Thali */
 .thali-title {
-    font-size: 0.85rem !important; /* Smaller to fit the box */
+    font-size: 0.85rem !important;
+    /* Smaller to fit the box */
     line-height: 1.2;
-    color: #D32F2F; /* Optional: Slight color shift to highlight Thalis */
+    color: #D32F2F;
+    /* Optional: Slight color shift to highlight Thalis */
 }
 
 /* Description styling for the keyword items */
@@ -741,7 +912,7 @@ header {
 
 /* Ensure the card accommodates the extra text */
 .dish-card {
-    min-height: 220px; 
+    min-height: 220px;
     display: flex;
     flex-direction: column;
 }
@@ -776,7 +947,8 @@ header {
     display: inline-flex;
     align-items: center;
     justify-content: center;
-    background-color: #27ae60; /* Green for Call/Success */
+    background-color: #27ae60;
+    /* Green for Call/Success */
     color: white;
     text-decoration: none;
     padding: 12px 30px;
@@ -797,7 +969,24 @@ header {
     margin-right: 8px;
 }
 
+.qty-btn {
+    width:30px; 
+    height:30px;
+    border-radius: 50%;
+}
 
+.view-cart-btn{
+    width: 100px;
+    height: 30px;
+    background-color: #FF8C00;
+    border-color: white;
+    color: white;
+    border-radius: 18px;
+    font-weight: bold;
+}
+
+#modalTotal {
+    color: rgb(211, 78, 37);
+}
 </style>
-
 </html>
