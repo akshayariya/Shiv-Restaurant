@@ -1,0 +1,143 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <title>Shiv Bhojnalay - Pure Veg Menu</title>
+    <link rel="stylesheet" href="styles.css">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Great+Vibes&family=Kalam:wght@700&family=Pinyon+Script&display=swap" rel="stylesheet">
+</head>
+
+<body>
+
+    <!-- Splash Screen -->
+<div id="splash">
+    <div class="splash-container">
+        <div class="brand-logo-placeholder">SB</div>
+        <h1 class="brand-name">SHIV BHOJNALAY</h1>
+        <p class="brand-tagline">100% PURE VEGETARIAN🌿</p>
+        
+        <button class="get-started-btn" onclick="hideSplash()">View Menu</button>
+    </div>
+</div>
+    <!-- Main App -->
+    <header>
+        <div class="header-top">
+            <h2 class="brand">Shiv Bhojnalay</h2>
+            <div class="lang-toggle">
+                <button id="langBtn" onclick="toggleLanguage()">हिन्दी</button>
+            </div>
+        </div>
+
+        <div class="trust-bar">
+            <span>🌿 100% Pure Veg</span>
+            <span>👨‍🍳 Fresh</span>
+            <span>✨ Hygienic</span>
+        </div>
+
+        <div class="search-container">
+            <input type="text" id="searchInput" placeholder="Search for dishes..." onkeyup="filterMenu()">
+        </div>
+
+        <div id="categoryContainer" class="category-tabs">
+            <!-- Categories injected here -->
+        </div>
+    </header>
+
+    <main id="menuGrid" class="menu-grid">
+        <!-- Dish cards injected here -->
+    </main>
+
+    <!-- Floating Cart Bar -->
+    <div id="cartBar" class="cart-bar hidden" onclick="openOrderModal()">
+        <span id="cartCount">0 Items</span>
+        <span id="cartTotal">₹0</span>
+        <button class="view-cart-btn">View Order</button>
+    </div>
+
+    <div id="orderModal" class="modal">
+        <div class="modal-content">
+            <h3 style="color: #D32F2F;">Review Your Order</h3>
+
+            <div id="cartReviewList" class="cart-review-list"></div>
+
+            <div class="cart-total-display">
+                <strong>Total Amount: </strong>
+                <span id="modalTotal">₹0</span>
+            </div>
+
+            <hr style="margin: 15px 0; border: 0; border-top: 1px solid #eee;">
+
+            <input type="text" id="custName" placeholder="Your Name" required>
+            <input type="text" id="hotelName" placeholder="Hotel Name" required>
+            <input type="text" id="roomNo" placeholder="Room Number" required>
+
+            <button class="whatsapp-btn" onclick="sendToWhatsApp()">Order via WhatsApp</button>
+            <button class="close-btn" onclick="closeOrderModal()">Back to Menu</button>
+        </div>
+    </div>
+
+    <script src="script.js"></script>
+</body> 
+<footer class="clean-footer">
+    <!-- Trust Badges Section -->
+    <div class="trust-container">
+        <div class="trust-item">
+            <span class="icon">🌿</span>
+            <span class="label">100% PURE VEG</span>
+        </div>
+        <div class="trust-item">
+            <span class="icon">👨‍🍳</span>
+            <span class="label">FRESHLY COOKED</span>
+        </div>
+        <div class="trust-item">
+            <span class="icon">✨</span>
+            <span class="label">HYGIENIC KITCHEN</span>
+        </div>
+    </div>
+
+    <!-- Branding & Info -->
+    <div class="footer-main">
+        <h3 class="footer-brand">Shiv Bhojnalay</h3>
+        <p class="serving-since">Serving happiness since 1995</p>
+
+        <div class="hours-box">
+            <strong>Opening Hours</strong>
+            <span>11:00 AM – 11:00 PM</span>
+        </div>
+    </div>
+
+    <!-- Terms & Conditions Section -->
+    <div class="policy-section">
+        <p class="policy-note">
+            ⚠️ <strong>Terms & Conditions:</strong> Please verify delivery availability and applicable charges on call
+            before placing your order.
+        </p>
+    </div>
+
+    <div class="footer-contact">
+        <div class="contact-row">
+            <strong>📍 Address:</strong>
+            <p>Shop no.3, Airport Rd, near Rana Pratap railway station, Thoker Chouraha, Udaipur, Rajasthan 313003</p>
+        </div>
+
+        <div class="contact-row">
+            <strong>📞 Contact Number:</strong>
+            <p>8233106918 || 9460113849</p>
+        </div>
+
+        <!-- Primary Call Button -->
+        <a href="tel:8233106918" class="footer-call-btn">
+            <span>Call Now to Order</span>
+        </a>
+    </div>
+    <!-- Footer Bottom -->
+    <div class="footer-bottom">
+        <p>© 2026 Shiv Bhojnalay. All Rights Reserved.</p>
+        <p class="developer-tag">Developed with ❤️ for Udaipur Foodies</p>
+    </div>
+</footer>
+
+</html>
