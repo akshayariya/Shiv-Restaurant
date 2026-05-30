@@ -108,7 +108,7 @@ Open `index.html` in your browser, or deploy to GitHub Pages for instant hosting
 
 ## 📜 License
 
-MIT License. Use freely and make it your own!
+Proprietary. All Rights Reserved. You may not copy, modify, distribute, or use this software without explicit written permission from the owner.
 
 ---
 
